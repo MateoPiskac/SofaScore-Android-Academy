@@ -11,4 +11,5 @@
     <string name="add_button_text">Add</string>
     <string name="contacts">Contacts</string>
     <string name="add">Add</string>
+    <string name="element_text">Placeholder</string>
 </resources>

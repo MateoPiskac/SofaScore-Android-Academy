@@ -13,19 +13,12 @@ data class Person(val name: String, val surname: String, val age: String, val oi
     }
 }
 open class PageViewModel : ViewModel() {
-    var currentTab = 0
+    private var currentTab = 0
     private val people = mutableListOf<Person>()
     private val _dataItemListLiveData = MutableLiveData<List<Person>>()
     val dataItemListLiveData: LiveData<List<Person>>
         get() = _dataItemListLiveData
 
-    fun init() {
-        val dataItems = mutableListOf<Person>()
-        for (i in 0 until people.size) {
-            dataItems.add(people[i])
-        }
-        _dataItemListLiveData.value = people
-    }
     fun getTabFragment(): Fragment {
         return when (currentTab) {
             0 -> InputFragment()
