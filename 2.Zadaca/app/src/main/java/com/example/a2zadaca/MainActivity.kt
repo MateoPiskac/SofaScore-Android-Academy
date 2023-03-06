@@ -1,15 +1,11 @@
 package com.example.a2zadaca
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import com.example.a2zadaca.ui.main.SectionsPagerAdapter
 import com.example.a2zadaca.databinding.ActivityMainBinding
+import com.example.a2zadaca.ui.main.ViewPager2
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,17 +16,15 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val viewPager = findViewById<ViewPager>(R.id.view_pager)
+        val tabLayout = findViewById<TabLayout>(R.id.tabs)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
+        val adapter = ViewPager2(supportFragmentManager)
+        adapter.addFragment(InputFragment(), "Add")
+        adapter.addFragment(ListFragment(), "Contacts")
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
+
     }
 }
