@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a2zadaca.ui.main.Person
 
-class PersonAdapter() :
+class PersonAdapter :
     ListAdapter<Person, PersonAdapter.ViewHolder>(DiffCallback()) {
 
     private class DiffCallback : DiffUtil.ItemCallback<Person>() {

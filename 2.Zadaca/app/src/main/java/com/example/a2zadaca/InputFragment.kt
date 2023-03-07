@@ -14,7 +14,7 @@ class InputFragment : Fragment(R.layout.fragment_input) {
     private lateinit var binding: FragmentInputBinding
     private lateinit var viewModel: PageViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentInputBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(requireActivity())[PageViewModel::class.java]
         binding.addButton.setOnClickListener {

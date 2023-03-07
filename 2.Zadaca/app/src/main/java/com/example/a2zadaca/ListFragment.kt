@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.a2zadaca.databinding.FragmentListBinding
 import com.example.a2zadaca.ui.main.PageViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -32,7 +31,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListBinding.inflate(layoutInflater)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         return binding.root
