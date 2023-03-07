@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a2zadaca.ui.main.PageViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var pageViewModel: PageViewModel
@@ -16,11 +20,11 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var personAdapter: PersonAdapter
     override fun onStart() {
         super.onStart()
-
+        pageViewModel.people().onEach(personAdapter::submitList).launchIn(lifecycleScope)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this)[PageViewModel::class.java]
+        pageViewModel = ViewModelProvider(requireActivity())[PageViewModel::class.java]
 
     }
 
@@ -31,18 +35,14 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        pageViewModel.dataItemListLiveData.observe(viewLifecycleOwner) {
-            recyclerView.adapter?.notifyItemInserted(it.size-1)
-        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        personAdapter = PersonAdapter(pageViewModel.getPeople())
+        personAdapter = PersonAdapter()
         recyclerView.adapter=personAdapter
-        personAdapter.notifyDataSetChanged()
-
     }
 
 }

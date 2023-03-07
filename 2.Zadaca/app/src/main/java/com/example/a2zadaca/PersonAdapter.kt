@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a2zadaca.ui.main.Person
 
-class PersonAdapter(private val people: List<Person>) :
+class PersonAdapter() :
     ListAdapter<Person, PersonAdapter.ViewHolder>(DiffCallback()) {
 
     private class DiffCallback : DiffUtil.ItemCallback<Person>() {
@@ -30,9 +30,8 @@ class PersonAdapter(private val people: List<Person>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val person = people[position]
+        val person = getItem(position)
         holder.textViewPerson.text = person.toString()
     }
 
-    override fun getItemCount() = people.size
 }

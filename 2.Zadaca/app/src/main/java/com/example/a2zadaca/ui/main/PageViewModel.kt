@@ -1,11 +1,13 @@
 package com.example.a2zadaca.ui.main
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import com.example.a2zadaca.InputFragment
 import com.example.a2zadaca.ListFragment
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 data class Person(val name: String, val surname: String, val age: String, val oib: String){
     override fun toString(): String {
@@ -13,31 +15,10 @@ data class Person(val name: String, val surname: String, val age: String, val oi
     }
 }
 open class PageViewModel : ViewModel() {
-    private var currentTab = 0
-    private val people = mutableListOf<Person>()
-    private val _dataItemListLiveData = MutableLiveData<List<Person>>()
-    val dataItemListLiveData: LiveData<List<Person>>
-        get() = _dataItemListLiveData
-
-    fun getTabFragment(): Fragment {
-        return when (currentTab) {
-            0 -> InputFragment()
-            1 -> ListFragment()
-            else -> InputFragment()
-        }
-    }
+    private val peopleFlow = MutableStateFlow<List<Person>>(emptyList())
 
     fun addPerson(person: Person) {
-        people.add(person)
-        _dataItemListLiveData.value = people
+        peopleFlow.value = peopleFlow.value + person
     }
-
-    fun getPeople(): List<Person> {
-        return people.toList()
-    }
-
-    fun clearPeople() {
-        people.clear()
-        _dataItemListLiveData.value = people
-    }
+    fun people(): Flow<List<Person>> = peopleFlow
 }
