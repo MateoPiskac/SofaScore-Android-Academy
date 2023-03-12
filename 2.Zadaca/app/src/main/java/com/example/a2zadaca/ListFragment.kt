@@ -17,10 +17,10 @@ import kotlinx.coroutines.flow.onEach
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var binding: FragmentListBinding
     private lateinit var pageViewModel: PageViewModel
-    private lateinit var personAdapter: PersonAdapter
+    private lateinit var carAdapter: CarAdapter
     override fun onStart() {
         super.onStart()
-        pageViewModel.people().onEach(personAdapter::submitList).launchIn(lifecycleScope)
+        pageViewModel.cars().onEach(carAdapter::submitList).launchIn(lifecycleScope)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +39,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        personAdapter = PersonAdapter()
-        binding.recyclerView.adapter=personAdapter
+        carAdapter = CarAdapter()
+        binding.recyclerView.adapter=carAdapter
     }
 
 }

@@ -7,31 +7,31 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a2zadaca.ui.main.Person
+import com.example.a2zadaca.data.Car
 
-class PersonAdapter :
-    ListAdapter<Person, PersonAdapter.ViewHolder>(DiffCallback()) {
+class CarAdapter :
+    ListAdapter<Car, CarAdapter.ViewHolder>(DiffCallback()) {
 
-    private class DiffCallback : DiffUtil.ItemCallback<Person>() {
-        override fun areItemsTheSame(oldItem: Person, newItem: Person): Boolean =
+    private class DiffCallback : DiffUtil.ItemCallback<Car>() {
+        override fun areItemsTheSame(oldItem: Car, newItem: Car): Boolean =
             oldItem.toString()===newItem.toString()
 
-        override fun areContentsTheSame(oldItem: Person, newItem: Person): Boolean =
+        override fun areContentsTheSame(oldItem: Car, newItem: Car): Boolean =
             oldItem==newItem
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewPerson: TextView = itemView.findViewById(R.id.textViewPerson)
+        val textViewCar: TextView = itemView.findViewById(R.id.textViewCar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.person_list_item, parent, false)
+            .inflate(R.layout.car_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val person = getItem(position)
-        holder.textViewPerson.text = person.toString()
+        val car = getItem(position)
+        holder.textViewCar.text = car.toString()
     }
 
 }

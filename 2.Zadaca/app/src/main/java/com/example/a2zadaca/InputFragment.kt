@@ -1,14 +1,16 @@
 package com.example.a2zadaca
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.a2zadaca.data.Car
+import com.example.a2zadaca.data.EngineType
 import com.example.a2zadaca.databinding.FragmentInputBinding
 import com.example.a2zadaca.ui.main.PageViewModel
-import com.example.a2zadaca.ui.main.Person
 
 class InputFragment : Fragment(R.layout.fragment_input) {
     private lateinit var binding: FragmentInputBinding
@@ -17,17 +19,22 @@ class InputFragment : Fragment(R.layout.fragment_input) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentInputBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(requireActivity())[PageViewModel::class.java]
+        binding.engineSpinner.adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, EngineType.values())
         binding.addButton.setOnClickListener {
-            viewModel.addPerson(Person(
-                binding.editTextName.text.toString(),
-                binding.editTextSurname.text.toString(),
+            viewModel.addCar(
+                Car(
+                binding.editTextManufacturer.text.toString(),
+                binding.editTextModel.text.toString(),
                 binding.editTextAge.text.toString(),
-                binding.editTextOIB.text.toString(),
-            ))
-            binding.editTextName.text.clear()
-            binding.editTextSurname.text.clear()
+                binding.editTextEnginePower.text.toString(),
+                    binding.engineSpinner.selectedItem as EngineType
+            )
+            )
+            binding.editTextManufacturer.text.clear()
+            binding.editTextModel.text.clear()
             binding.editTextAge.text.clear()
-            binding.editTextOIB.text.clear()
+            binding.editTextEnginePower.text.clear()
+            binding.engineSpinner.setSelection(0)
         }
         return binding.root
     }

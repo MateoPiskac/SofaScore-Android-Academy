@@ -1,14 +1,9 @@
 package com.example.a2zadaca
 
 import android.os.Bundle
-import android.widget.TextView
-import com.google.android.material.tabs.TabLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import androidx.fragment.app.Fragment
 import com.example.a2zadaca.databinding.ActivityMainBinding
-import com.example.a2zadaca.ui.main.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,29 +13,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val screenTitle = binding.title
-        val viewPager = binding.viewPager
-        val tabLayout = binding.tabs
+        replaceFragment(InputFragment())
 
-        viewPager.adapter = ViewPagerAdapter(this)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Add"
-                1 -> "Contacts"
-                else -> "Invalid tab"
-            }
-        }.attach()
-
-        viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                screenTitle.text = when (position) {
-                    0 -> "Add"
-                    1 -> "Contacts"
-                    else -> "Invalid tab"
+        binding.bottomNavBar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.add_nav -> {
+                    replaceFragment(InputFragment())
+                    screenTitle.text = "Add"
                 }
+                R.id.cars_nav -> {
+                    replaceFragment(ListFragment())
+                    screenTitle.text = "Car List"
+                }
+                else -> {}
             }
-        })
+            true
+        }
+
     }
-}
+    private fun replaceFragment(inputFragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame,inputFragment)
+        fragmentTransaction.commit()
+
+    }
+    }
+

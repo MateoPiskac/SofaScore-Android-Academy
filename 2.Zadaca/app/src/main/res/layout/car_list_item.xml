@@ -6,11 +6,13 @@
     android:layout_marginLeft="@dimen/margin_medium"
     android:layout_marginRight="@dimen/margin_medium"
     android:gravity="center_vertical"
-    tools:listitem="@layout/person_list_item">
+    tools:listitem="@layout/car_list_item">
 
     <TextView
-        android:id="@+id/textViewPerson"
+        android:id="@+id/textViewCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/element_text"/>
+        android:text="@string/element_text"
+        android:textSize="16sp"
+        android:fontFamily="@font/cabal"/>
 </FrameLayout>
