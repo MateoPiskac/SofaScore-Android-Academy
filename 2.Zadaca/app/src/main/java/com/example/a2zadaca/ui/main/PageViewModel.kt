@@ -9,7 +9,7 @@ open class PageViewModel : ViewModel() {
     private val carFlow = MutableStateFlow<List<Car>>(emptyList())
 
     fun addCar(car: Car) {
-        carFlow.value = carFlow.value + car
+        carFlow.value = (carFlow.value + car)
     }
     fun cars(): Flow<List<Car>> = carFlow
 }

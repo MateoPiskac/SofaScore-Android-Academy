@@ -9,6 +9,6 @@ data class Car(
     val engineType: EngineType
 ) {
     override fun toString(): String {
-        return ("$manufacturer, $model, $age, $enginePower HP,$cylinders $engineType")
+        return ("$manufacturer, $model, $age, $enginePower HP, $cylinders cylinders $engineType")
     }
 }
