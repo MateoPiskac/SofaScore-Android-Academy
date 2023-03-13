@@ -2,10 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="LabelFor"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bart"
+    tools:ignore="LabelFor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginEnd="346dp"
+            android:fontFamily="@font/cabal"
             android:text="@string/add"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -34,8 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/name"
-            app:layout_constraintBottom_toTopOf="@+id/editTextName"
+            android:fontFamily="@font/cabal"
+            android:text="@string/manufacturer"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/edit_text_manufacturer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +47,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <EditText
-            android:id="@+id/editTextName"
+            android:id="@+id/edit_text_manufacturer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -59,7 +63,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editTextSurname"
+            android:id="@+id/edit_text_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -91,7 +95,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editTextOIB"
+            android:id="@+id/edit_text_engine_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -105,53 +109,96 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.62"
             tools:ignore="SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/textViewSurname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/surname"
-            app:layout_constraintBottom_toTopOf="@+id/editTextSurname"
+            android:fontFamily="@font/cabal"
+            android:text="@string/model"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/edit_text_model"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextName"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_manufacturer"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textViewAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabal"
             android:text="@string/age"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/editTextAge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSurname"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_model"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/textViewOib"
+            android:id="@+id/textViewEngineType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/oib"
-            app:layout_constraintBottom_toTopOf="@+id/editTextOIB"
+            android:fontFamily="@font/cabal"
+            android:text="@string/enginePower"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/edit_text_engine_power"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextAge"
             app:layout_constraintVertical_bias="1.0" />
 
+        <Spinner
+            android:id="@+id/engineSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/engineType"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@id/radio_group"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_engine_power" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/add_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engineSpinner">
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_4_cylinders"
+                android:layout_marginEnd="13dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_6_cylinders"
+                android:layout_marginEnd="13dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_8_cylinders"
+                android:layout_marginEnd="13dp"/>
+        </RadioGroup>
+
         <Button
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabal"
             android:text="@string/add_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/radio_group"
             app:layout_constraintVertical_bias="0.85" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
